@@ -23,12 +23,16 @@ export class RegisterComponent implements OnInit {
   };
   public error = null;
   ngOnInit(): void {
+    console.log( window.localStorage.getItem("token"));
+    
   }
 
   onSubmit(){
     this.error = null;
     return this.http.post('http://127.0.0.1:8000/api/auth/login', this.form).subscribe(
-      data=> console.log(data),
+      (data:any)=> {console.log(data),
+              window.localStorage.setItem("token" , data.access_token)
+      },
       error => this.handelError(error) 
     );
   }
@@ -38,7 +42,8 @@ export class RegisterComponent implements OnInit {
 
   // It is only for insert data
     onInsert(){
-      return this.http.post('http://127.0.0.1:8000/api/auth/signup', this.forms).subscribe(
+    this.error = null;
+     return this.http.post('http://127.0.0.1:8000/api/auth/signup', this.forms).subscribe(
       data=> console.log(data),
       error => this.handelErrorInsert(error) 
     );
