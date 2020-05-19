@@ -1,23 +1,3 @@
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" ></a>
-    <div class="alert alert-danger" [hidden] = "!error">
-        {{error}}
-    </div>
-    <div>
-         <form  #loginForm=ngForm (ngSubmit)="onSubmit()">
-            
-            <div class="form-group row">
-                <div>
-                    <label class="A">Email :</label>
-                    <input class="A"  id="ex1" type="text" class="padding" name="email" placeholder="Email" [(ngModel)]="form.email">
-                    <label class="A" >Password :</label>
-                    <input class="A" id="ex2" type="text" class="padding" name="password" placeholder="Password" [(ngModel)]="form.password">
-                    <button class="size" type="submit"[disabled]="!loginForm.valid" >Login</button>
-                </div>
-            </div>
-        </form>
-    </div>     
-</nav>  
 
 
 <div class="mt-4 col-8 offset-2">
@@ -25,9 +5,9 @@
         <div class="card-header">Register Here</div>
         <div class="card-body">
             <form #registrationForm = ngForm (ngSubmit)="onInsert()">
-                <!-- <div class="alert alert-danger" [hidden] = "!error">
-                    {{error}}
-                </div> -->
+                <div class="alert alert-success" [hidden] = "!msg">
+                    {{msg}}
+                </div>
 
                 <div class="form-group row">
                   <label for="inputName3"  class="col-sm-2 col-form-label">Name</label>
@@ -63,8 +43,9 @@
 
               
                 <div class="form-group row">
-                  <div class="col-sm-10">
+                  <div class="col-sm-10 offset-2">
                     <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">Register</button>
+                    <button type="submit" class="btn btn-primary float-right" [routerLink]="['/login']" routerLinkActive="router-link-active"  >Login</button>
                   </div>
                 </div>
               </form>

@@ -1,1 +1,25 @@
-<p>home works!</p>
+<nav class="navbar navbar-light bg-light">
+    <button  >   <a  class="size" class="navbar-brand offset-2"(click)="logout()">Logout</a></button>
+   </nav>
+   
+   
+     
+
+  <div class="user-table-wrapper">
+    <ngx-datatable [rows]="rows" >
+        
+        <ngx-datatable-column name="Sr. No" [width]="50" [cellClass]="'table-data-cell'" [canAutoResize]="true" [draggable]="false" [resizeable]="false" [frozenLeft]="true"  > <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template> {{ rowIndex + 1 }} 
+
+        </ng-template> </ngx-datatable-column>
+        <ngx-datatable-column name="Name" [cellClass]="'table-data-cell'"  [canAutoResize]="true" [draggable]="false" [resizeable]="false" [frozenLeft]="true"  > 
+
+            <ng-template let-rowIndex="rowIndex" let-row="row"  ngx-datatable-cell-template> {{ row.name}} 
+
+        </ng-template> </ngx-datatable-column>
+        <ngx-datatable-column name="Email" [cellClass]="'table-data-cell'" [canAutoResize]="true" [draggable]="false" [resizeable]="false" [frozenLeft]="true"  > 
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template> {{ row.email }} 
+
+        </ng-template> </ngx-datatable-column>
+    
+    </ngx-datatable>
+  </div>

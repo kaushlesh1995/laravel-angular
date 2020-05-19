@@ -22,12 +22,16 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('login', 'UserController@login');
-    Route::get('test', 'UserController@test');
+    
     Route::post('signup', 'UserController@signup');
+    Route::post('update', 'UserController@update');
+  
   
     Route::group([
       'middleware' => 'auth:api'
     ], function() {
+        Route::get('getData', 'UserController@index');
+        Route::get('allData', 'UserController@getUser');
         Route::get('logout', 'UserController@logout');
         Route::get('user', 'UserController@user');
     });

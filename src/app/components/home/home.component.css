@@ -1,0 +1,36 @@
+table{
+    width: 400px;
+    height: 500px;
+    border: 1px ;
+}
+.rows{
+    border: 1px solid;
+}
+.size{
+    background-color: #09224F ;
+    border: 0px;
+    color: white;
+    margin-left: 9px;
+}
+    
+
+::ng-deep datatable-header.datatable-header{
+    border: 1px solid;
+}
+.table-data-cell{
+    border: 1px solid;
+    background-color: rgb(223, 208, 208);
+}
+::ng-deep datatable-body-cell.datatable-body-cell.sort-active.table-data-cell {
+    border: 1px solid;
+}
+.user-table-wrapper{
+    width: 40%;
+    background-color: rgb(223, 208, 208);
+}
+
+::ng-deep .ngx-datatable .datatable-header {
+    display: block;
+    overflow: hidden;
+    width: 40%;
+}

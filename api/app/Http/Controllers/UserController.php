@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed'
         ]);
         $user = new User([
@@ -46,8 +46,9 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
+            'email' => 'required|string',
             'password' => 'required|string',
+
             'remember_me' => 'boolean'
         ]);
         $credentials = request(['email', 'password']);
@@ -93,5 +94,58 @@ class UserController extends Controller
         return response()->json($request->user());
     }
 
-   
+
+    public function index()
+    {
+        $users = User::get();
+      $user = auth()->user()->user;
+       
+ 
+        return response()->json($users);
+      
+    }
+
+
+    // public function update(Request $request, $id)
+    // {
+    //     $user = auth()->user()->products()->find($id);
+ 
+    //     if (!$user) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Product with id ' . $id . ' not found'
+    //         ], 400);
+    //     }
+ 
+    //     $updated = $user->fill($request->all())->save();
+ 
+    //     if ($updated)
+    //         return response()->json([
+    //             'success' => true
+    //         ]);
+    //     else
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Product could not be updated'
+    //         ], 500);
+    // }
+ 
+ 
+        
+    public function getUser(Request $request){
+        // echo"hum nhi sudherenge";
+        $user = User::get();
+        print_r($user);
+        return $request->user();
+    }
+
+       
+            // 'success' => true,
+                       // 'data' => $user
+
+                       public function shivam(){
+                           echo"testone";
+                       }
+
 }
+
