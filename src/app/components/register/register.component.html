@@ -1,69 +1,62 @@
-
-
 <div class="mt-4 col-8 offset-2">
-    <div class="card">
-        <div class="card-header">Register Here</div>
-        <div class="card-body">
-            <form #registrationForm = ngForm (ngSubmit)="onInsert()">
-                <div class="alert alert-success" [hidden] = "!msg">
-                    {{msg}}
-                </div>
-
-                <div class="form-group row">
-                  <label for="inputName3"  class="col-sm-2 col-form-label">Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" name="name" placeholder="Name" required class="form-control" id="inputName3" [(ngModel)]="forms.name">
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputEmail3"  class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                      <input type="email" name="email" placeholder="Email" required class="form-control" id="inputEmail3" [(ngModel)]="forms.email">
-                    </div>
-                  </div>
-
-
-                <div class="form-group row">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                  <div class="col-sm-10">
-                    <input type="password" name="password" required placeholder="Password" class="form-control" id="inputPassword3" [(ngModel)]="forms.password">
-                  </div>
-                </div>
-
-
-                <div class="form-group row">
-                  <label for="inputConfirmPassword3" class="col-sm-2 col-form-label">Confirm Password</label>
-                  <div class="col-sm-10">
-                    <input type="password" name=" password_confirmation" required placeholder="Confirm Password" class="form-control" id="inputConfirmPassword3" [(ngModel)]="forms. password_confirmation">
-                  </div>
-                </div>
-
-
-
-              
-                <div class="form-group row">
-                  <div class="col-sm-10 offset-2">
-                    <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">Register</button>
-                    <button type="submit" class="btn btn-primary float-right" [routerLink]="['/login']" routerLinkActive="router-link-active"  >Login</button>
-                  </div>
-                </div>
-              </form>
+  <div class="card">
+    <div class="card-header">Register Here</div>
+    <div class="card-body">
+      <form #registrationForm=ngForm (ngSubmit)="onInsert(validatePasswords)">
+        <div class="alert alert-success" [hidden]="!msg">
+          {{msg}}
         </div>
+
+        <div class="alert alert-danger" [hidden]="!error">
+          {{error}}
+        </div>
+        <div class="form-group row">
+          <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" name="name" placeholder="Name" required class="form-control" id="inputName3"
+              [(ngModel)]="forms.name">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" name="email" placeholder="Email" required class="form-control" id="inputEmail3"
+              [(ngModel)]="forms.email">
+          </div>
+        </div>
+
+      
+        <div class="form-group row">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" name="password" required placeholder="Password" class="form-control"
+              id="inputPassword3" [(ngModel)]="forms.password" (input)="validatePasswords()">
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="inputConfirmPassword3" class="col-sm-2 col-form-label">Confirm Password</label>
+          <div class="col-sm-10">
+            <input type="password" name="password_confirmation" required placeholder="Confirm Password"
+              class="form-control" id="inputConfirmPassword3" [(ngModel)]="forms.password_confirmation" (input)="validatePasswords()">
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group row">
+          <div class="col-sm-10 offset-2">
+            <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">Register</button>
+            <button type="submit" class="btn btn-primary float-right" [routerLink]="['/login']"
+              routerLinkActive="router-link-active">Login</button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 
 
 </div>
-
-
-
-
-              
-              
-              
-              
-            
-         
-   
-   
- 

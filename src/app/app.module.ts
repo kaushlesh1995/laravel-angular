@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ModalModule } from 'ngb-modal';
 
 
 @NgModule({
@@ -23,15 +24,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NavbarComponent,
     HomeComponent,
     LogoutComponent,
-   
-   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

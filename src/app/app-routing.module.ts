@@ -7,8 +7,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { HomeComponent } from './components/home/home.component';
 
 
-const routes: Routes = [{path :'login', component : LoginComponent},
-                        
+const routes: Routes = [{path :'', component : LoginComponent},
+                        {path :'login', component : LoginComponent},
                         {path :'register', component : RegisterComponent},
                         {path :'home', component : HomeComponent},
                         {path :'logout', component : LogoutComponent},

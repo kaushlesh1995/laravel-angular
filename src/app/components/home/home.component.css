@@ -7,10 +7,11 @@ table{
     border: 1px solid;
 }
 .size{
-    background-color: #09224F ;
+    background-color:#5600fff7;
     border: 0px;
+    text-align: center;
     color: white;
-    margin-left: 9px;
+    width: 540px;
 }
     
 
@@ -19,18 +20,35 @@ table{
 }
 .table-data-cell{
     border: 1px solid;
-    background-color: rgb(223, 208, 208);
+    background-color: #09004F;
 }
 ::ng-deep datatable-body-cell.datatable-body-cell.sort-active.table-data-cell {
     border: 1px solid;
 }
 .user-table-wrapper{
     width: 40%;
-    background-color: rgb(223, 208, 208);
 }
-
 ::ng-deep .ngx-datatable .datatable-header {
     display: block;
     overflow: hidden;
-    width: 40%;
+    width: 70%;
+}
+.color{
+    color: blue;
+}
+.modal-sm
+{
+  top: 50%;
+  left: 50%;
+  width:30em;
+  height:18em;
+  background-color: rgba(0,0,0,0.5);
+}
+::ng-deep .datatable-body-cell-label {
+    text-align: center;
+}
+
+.filter-data{
+    width: 25%;
+    height: 5%;
 }

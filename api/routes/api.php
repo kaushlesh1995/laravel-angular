@@ -24,15 +24,18 @@ Route::group([
     Route::post('login', 'UserController@login');
     
     Route::post('signup', 'UserController@signup');
-    Route::post('update', 'UserController@update');
+
+    Route::post('test', 'UserController@test');
   
   
     Route::group([
       'middleware' => 'auth:api'
     ], function() {
+        Route::put('update/{id}', 'UserController@update');
         Route::get('getData', 'UserController@index');
-        Route::get('allData', 'UserController@getUser');
+        Route::get('allData/{id}', 'UserController@getUser');
         Route::get('logout', 'UserController@logout');
         Route::get('user', 'UserController@user');
+        Route::delete('user/{id}', 'UserController@delete');
     });
 });

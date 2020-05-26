@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     /**
@@ -15,12 +16,13 @@ class UserController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
-    public function signup(Request $request)
-    {
+
+     // It is Registration Api.
+     public function signup(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required|min:6|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'
         ]);
         $user = new User([
             'name' => $request->name,
@@ -32,7 +34,7 @@ class UserController extends Controller
             'messages' => 'Successfully created user!'
         ], 201);
     }
-  
+
     /**
      * Login user and create token
      *
@@ -43,8 +45,9 @@ class UserController extends Controller
      * @return [string] token_type
      * @return [string] expires_at
      */
-    public function login(Request $request)
-    {
+
+    // It is Login Api.
+    public function login(Request $request) {
         $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
@@ -70,82 +73,109 @@ class UserController extends Controller
             )->toDateTimeString()
         ]);
     }
-  
+
     /**
      * Logout user (Revoke the token)
      *
      * @return [string] message
      */
-    public function logout(Request $request)
-    {
+    
+    // It is Logout Api.
+    public function logout(Request $request)  {
         $request->user()->token()->revoke();
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
     }
-  
+
     /**
      * Get the authenticated User
      *
      * @return [json] user object
      */
-    public function user(Request $request)
-    {
+    
+    //It will given token based data  
+    public function user(Request $request){
         return response()->json($request->user());
     }
 
+    //It will given all data.  
+   public function index() {
+       $users = User::get();
+     $user = auth()->user()->user;
+     return response()->json($users);
+   }
+  
+   //It will do update the data. 
+   public function update(Request $request, $id) {
+       $email = $request->only('email');
+     $user = auth()->user()->find($id);
+     $otherUser =   User::where('email', $email['email'])->first(); 
+     
+     if(!empty($otherUser) && $otherUser->id != $id){
+  
+         return response()->json([
+            'success' => false,
+            'message' => ' Email already exist'
+          ], 400);
+      }
 
-    public function index()
-    {
-        $users = User::get();
-      $user = auth()->user()->user;
-       
- 
-        return response()->json($users);
+      if (!$user) {
+          return response()->json([
+             'success' => false,
+              'message' => ' User is not existing on this  ' . $id . '.'
+          ], 400);
+      }
+      $updated = $user->fill($request->all())->save();
+      if ($updated) {
+          return response()->json([
+              'success' => true,
+              'message' => ' User is updated successfully. '
+          ]);
+      } else{
+          return response()->json([
+              'success' => false,
+              'message' => 'User could not be updated'
+          ], 500);
+      }
+  }
+   
+
+   //It will do delete the data. 
+  public function delete(Request $request, $id){
+      $user = auth()->user()->find($id);
+      if(!$user){
+          return response()->json([
+              'success' => false,
+              'message' => ' User is not avalibale on id number' . $id . '.'
+          ]);
+      } else{
+          $user->delete();
+          return response()->json([
+              'success' => true,
+              'status' => 204,
+              'message' => ' User deleted successfully.'
+          ]);
+      }
+  }
+
+  // It will given data data based on id.
+  public function getUser($id) {
+      $user = User::find($id);
+      if(!$user){
+          return response()->json([
+              'success' => false,
+              'message' => ' User is not exist on id number ' . $id . '.'
+          ]);
+  
+      }else{
+          return response()->json([
+              'status' => 200,
+              'data' => $user
+          ]);
+  
+      }
+  }
+  
       
-    }
-
-
-    // public function update(Request $request, $id)
-    // {
-    //     $user = auth()->user()->products()->find($id);
- 
-    //     if (!$user) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Product with id ' . $id . ' not found'
-    //         ], 400);
-    //     }
- 
-    //     $updated = $user->fill($request->all())->save();
- 
-    //     if ($updated)
-    //         return response()->json([
-    //             'success' => true
-    //         ]);
-    //     else
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Product could not be updated'
-    //         ], 500);
-    // }
- 
- 
-        
-    public function getUser(Request $request){
-        // echo"hum nhi sudherenge";
-        $user = User::get();
-        print_r($user);
-        return $request->user();
-    }
-
-       
-            // 'success' => true,
-                       // 'data' => $user
-
-                       public function shivam(){
-                           echo"testone";
-                       }
-
 }
-
